@@ -1,31 +1,114 @@
-Weather App Project
+<div align="center">
 
-Overview
+# 🌦️ EasyPeasy Weather
 
-This project is a simple weather app that provides the basic weather report for a given city, state, or country. The app uses the Weather API to fetch the current weather data and displays it in a user-friendly format. Additionally, the app uses the Pyttsx3 library to convert the text into speech, allowing users to hear the weather report.
+### Type a place. Get the weather, on screen and out loud.
 
+A tiny Python command-line app that fetches live weather from [WeatherAPI](https://www.weatherapi.com/) and reads the report aloud with offline text-to-speech.
 
-Features
+[![Python](https://img.shields.io/badge/Python-3.8%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![WeatherAPI](https://img.shields.io/badge/Data-WeatherAPI-1E90FF?style=for-the-badge)](https://www.weatherapi.com/)
+[![pyttsx3](https://img.shields.io/badge/Speech-pyttsx3-orange?style=for-the-badge)](https://pypi.org/project/pyttsx3/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
-1. City, State, and Country Selection: Users can input the city, state, or country for which they want to get the weather report.
-2. Current Weather Data: The app fetches the current weather data from the Weather API, including temperature in Celsius and Fahrenheit, wind speed, humidity, and weather condition.
-3. Text-to-Speech: The app uses Pyttsx3 to convert the weather report into speech, allowing users to hear the report.
-4. User-Friendly Output: The app displays the weather report in a clear and concise format, making it easy for users to understand.
+[![Last commit](https://img.shields.io/github/last-commit/HarshCoder1122/EasyPeasy-Weather-app?style=flat-square)](https://github.com/HarshCoder1122/EasyPeasy-Weather-app/commits/main)
+[![Issues](https://img.shields.io/github/issues/HarshCoder1122/EasyPeasy-Weather-app?style=flat-square)](https://github.com/HarshCoder1122/EasyPeasy-Weather-app/issues)
 
-Technical Details
+</div>
 
-1. Programming Language: The project is built using Python.
-2. API: The Weather API is used to fetch the current weather data.
-3. Libraries: The project uses the following libraries:
-   requests to send HTTP requests to the Weather API.
-   json to parse the JSON response from the API.
-   pyttsx3 to convert text into speech.
-Code Structure: The code is organized into a single Python file, with clear and concise comments to explain each section.
+## Table of contents
 
+- [What it does](#what-it-does)
+- [Example](#example)
+- [Getting started](#getting-started)
+- [How it works](#how-it-works)
+- [Project structure](#project-structure)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [License](#license)
 
-How to Use
+## What it does
 
-1. Run the Python script.
-2. Enter the city, state, or country for which you want to get the weather report.
-3. The app will display the current weather data, including temperature, wind speed, humidity, and weather condition.
-4. The app will also speak out the weather report using Pyttsx3.
+You enter a city, state, or country. The app calls the WeatherAPI *current conditions* endpoint and shows:
+
+| Field | Example |
+|---|---|
+| Location | City, region, country |
+| Temperature | Celsius and Fahrenheit |
+| Condition | "Partly cloudy" |
+| Wind | Speed in km/h |
+| Humidity | Percentage |
+
+It then speaks the same report through your speakers using `pyttsx3`, which works offline using your operating system's built-in voices.
+
+## Example
+
+```text
+Enter the city Name: Jaipur
+City: Jaipur
+State: Rajasthan
+Country: India
+The Temperature in Celsius: 31.0
+The Temperature in Fahrenheit: 87.8
+Weather: Sunny
+Wind Speed in Km/h: 11.2
+Humidity: 42
+```
+
+## Getting started
+
+### Prerequisites
+
+- Python 3.8 or newer
+- A free API key from [weatherapi.com](https://www.weatherapi.com/signup.aspx)
+- On Linux, `espeak` for speech (`sudo apt install espeak`)
+
+### Install and run
+
+```bash
+git clone https://github.com/HarshCoder1122/EasyPeasy-Weather-app.git
+cd EasyPeasy-Weather-app
+
+python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install requests pyttsx3
+
+python main.py
+```
+
+> **Use your own API key.** Open [main.py](main.py) and replace the key in the `link` URL with yours. Never commit a real key to a public repository; prefer reading it from an environment variable.
+
+## How it works
+
+1. `input()` reads the place name.
+2. `requests.get()` calls `https://api.weatherapi.com/v1/current.json?key=<KEY>&q=<place>`.
+3. The JSON response is parsed and the relevant fields are printed.
+4. `pyttsx3` queues one sentence per field and speaks them with `runAndWait()`.
+
+## Project structure
+
+```text
+EasyPeasy-Weather-app/
+├── main.py              # The whole app: fetch, print, speak
+├── README.md
+├── LICENSE
+├── CODE_OF_CONDUCT.md
+├── CONTRIBUTING.md
+└── SECURITY.md
+```
+
+## Roadmap
+
+- [ ] Read the API key from an environment variable
+- [ ] Handle unknown cities and network errors gracefully
+- [ ] Add a 3-day forecast
+- [ ] Add a `--no-speech` flag
+
+## Contributing
+
+Ideas and pull requests are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) and follow the [Code of Conduct](CODE_OF_CONDUCT.md).
+
+## License
+
+Released under the [MIT License](LICENSE).
+
+<div align="center"><sub>Built by <a href="https://github.com/HarshCoder1122">Harsh</a> while learning Python.</sub></div>
